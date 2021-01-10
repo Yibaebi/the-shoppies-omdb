@@ -4,10 +4,10 @@ The Shoppies is an application that manages movie nominations for the upcoming S
 
 ## Application Abilities
 
-Search OMDB and display the results (movies only)
-Add a movie from the search results to our nomination list
-View the list of films already nominated
-Remove a nominee from the nomination list
+- Search OMDB and display the results (movies only)
+- Add a movie from the search results to our nomination list
+- View the list of films already nominated
+- Remove a nominee from the nomination list
 
 ## Website is Live At:
 
