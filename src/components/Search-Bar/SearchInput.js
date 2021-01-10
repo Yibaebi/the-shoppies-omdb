@@ -1,11 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class SearchInput extends Component {
-  render() {
-    return (
-      <div>
-        <h1>SearchInput.js</h1>
-      </div>
-    );
-  }
+function SearchInput({ onSubmit, value, onChange }) {
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        value={value}
+        onChange={onChange}
+        type="search"
+        placeholder="Enter movie title"
+      />
+      <button type="submit" className="search-button">
+        <i className="fa fa-search"></i>
+      </button>
+    </form>
+  );
 }
+
+export default SearchInput;
