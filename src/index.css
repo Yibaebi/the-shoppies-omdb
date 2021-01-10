@@ -11,3 +11,38 @@ body {
 h1 {
   color: #d4d6b9;
 }
+
+.btn {
+  font-weight: bold;
+  padding: 0.6em;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1rem;
+  border: 0;
+  transition: all 0.5s;
+  border-radius: 10px;
+}
+.btn.nominate:disabled,
+.btn.nominate[disabled],
+.btn.delete:disabled,
+.btn.delete[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.btn span {
+  margin: 2px;
+}
+
+.btn i {
+  margin: 0 5px;
+}
+
+.btn.delete {
+  background-color: rgb(255, 70, 40);
+}
+
+.btn.nominate {
+  background-color: rgb(28, 184, 65);
+}

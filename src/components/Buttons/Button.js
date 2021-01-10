@@ -1,10 +1,16 @@
 import React from "react";
 
-function Button() {
+function Button({ type, className, onClick, disabled, iconClass, label }) {
   return (
-    <div>
-      <h1>Button</h1>
-    </div>
+    <button
+      type={type}
+      className={className}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      <i className={iconClass}></i>
+      <span>{label}</span>
+    </button>
   );
 }
 
