@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./MovieList.css";
 import MovieItem from "./MovieItem";
 
 class MovieList extends Component {
@@ -13,8 +14,17 @@ class MovieList extends Component {
   };
   render() {
     return (
-      <div>
-        <h1>MovieList.js</h1>
+      <div className="movie-list-container">
+        <MovieItem
+          disabled={this.state.disabled}
+          onClick={(e) => this.handleNomination(e)}
+          label={this.state.label}
+        />
+        <MovieItem
+          disabled={this.state.disabled}
+          onClick={(e) => this.handleNomination(e)}
+          label={this.state.label}
+        />
         <MovieItem
           disabled={this.state.disabled}
           onClick={(e) => this.handleNomination(e)}
