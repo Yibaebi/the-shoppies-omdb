@@ -2,12 +2,9 @@
   margin: 0 auto;
   width: 80%;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-}
-
-.nomination-list {
-  background-color: white;
+  justify-content: center;
+  align-items: center;
 }
 
 .movie-item {
@@ -36,6 +33,7 @@
   opacity: 0;
   transition: 0.8s ease;
 }
+
 .movie-item .title-container {
   position: absolute;
   bottom: 0;
