@@ -11,8 +11,25 @@ class App extends React.Component {
     this.state = {
       selectedIndex: 0,
       active: "active",
+      searchQuery: "",
+      Movies: [],
     };
     this.tabIndex = React.createRef();
+  }
+
+  componentDidMount() {
+    this.handleSearchSubmit = async (e) => {
+      e.preventDefault();
+      const response = await fetch(
+        `http://www.omdbapi.com/?s=${this.state.searchQuery}&apikey=d2850ca8&plot=full`
+      );
+      const responseJSON = await response.json();
+      const Movies = responseJSON;
+
+      this.setState({
+        Movies: Movies.Search,
+      });
+    };
   }
 
   handleSelect = (index) => {
@@ -38,7 +55,11 @@ class App extends React.Component {
             <h1>The Shoppies</h1>
             <p>Movie awards for entrepreneurs</p>
           </div>
-          <SearchBar />
+          <SearchBar
+            value={this.state.searchQuery}
+            onSubmit={(e) => this.handleSearchSubmit(e)}
+            onChange={(e) => this.setState({ searchQuery: e.target.value })}
+          />
         </header>
 
         <Tabs
@@ -62,7 +83,7 @@ class App extends React.Component {
           </TabList>
           <main className="main-container">
             <TabPanel>
-              <MovieList />
+              <MovieList Movies={this.state.Movies} />
             </TabPanel>
             <TabPanel>
               <NominationList />
