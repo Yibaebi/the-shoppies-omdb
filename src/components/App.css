@@ -1,5 +1,4 @@
 .App {
-  padding: 1em;
   background-color: #fbf7ed;
 }
 
@@ -7,11 +6,16 @@
   margin: 1em 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  height: 100vh;
+  background: url("../assets/svgs/award-illustration.svg");
+  background-position: center;
+  overflow: hidden;
+  position: relative;
 }
 
 .main-container {
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,17 +23,31 @@
   align-items: center;
 }
 
-.nomination-list {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 10vh;
-  background-color: white;
-  width: 300px;
+.nomination-container {
   margin: 0 auto;
-  align-self: flex-start;
   margin-top: 50px;
 }
 
+.nomination-item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  margin-bottom: 20px;
+}
+.nomination-item-details {
+  padding: 0.9em;
+  border-radius: 11px;
+  background: white;
+  box-shadow: 0 8px 6px -6px black;
+  border: 4px solid #008060;
+}
+
+.nomination-item-details p {
+  margin-top: 5px;
+}
 .tabs-container {
   margin: 10px auto;
   height: 30px;

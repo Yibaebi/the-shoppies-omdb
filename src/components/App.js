@@ -23,12 +23,21 @@ class App extends React.Component {
     this.setState({ selectedIndex: 0 });
   };
 
-  handleClick = () => {};
+  handleClick = () => {
+    console.log();
+  };
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>The Shoppies</h1>
+          <div className="ripple-background">
+            <div className="circle xxlarge shade1"></div>
+            <div className="circle xlarge shade2"></div>
+          </div>
+          <div className="hero">
+            <h1>The Shoppies</h1>
+            <p>Movie awards for entrepreneurs</p>
+          </div>
           <SearchBar />
         </header>
 

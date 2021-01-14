@@ -7,8 +7,11 @@ class NominationList extends Component {
   };
   render() {
     return (
-      <div>
-        <h1>Nomination List</h1>
+      <div className="nomination-container">
+        <NominationItem disabled={this.state.disabled} />
+        <NominationItem disabled={this.state.disabled} />
+        <NominationItem disabled={this.state.disabled} />
+        <NominationItem disabled={this.state.disabled} />
         <NominationItem disabled={this.state.disabled} />
       </div>
     );
