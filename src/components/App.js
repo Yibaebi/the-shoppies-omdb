@@ -4,7 +4,6 @@ import "./App.css";
 import MovieList from "./Movie-List/MovieList";
 import SearchBar from "./Search-Bar/SearchBar";
 import NominationList from "./Nomination-List/NominationList";
-import MovieItem from "./Movie-List/MovieItem";
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class App extends React.Component {
       active: "active",
       searchQuery: "",
       Movies: [],
-      disabled: false,
+      Nominations: [],
     };
     this.tabIndex = React.createRef();
   }
