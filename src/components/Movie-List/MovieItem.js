@@ -1,25 +1,24 @@
 import React from "react";
-import MoviePoster from "../../assets/Images/movie-poster.jpg";
 import Button from "../Buttons/Button";
 
-function MovieItem(props) {
+function MovieItem({ movie, onNominate }) {
   return (
     <div className="movie-item">
       <div className="image-container">
-        <img src={MoviePoster} alt="Movie Poster" />
+        <img src={movie.Poster} alt="Movie Poster" />
       </div>
       <div className="title-container">
-        <h3>Kill Billy</h3>
-        <p>(1993)</p>
+        <h3>{movie.Title}</h3>
+        <p>({movie.Year})</p>
       </div>
       <div className="movie-content-container">
         <Button
-          label={props.label}
+          label={movie.label}
           type="submit"
-          onClick={props.onClick}
+          onClick={(e) => onNominate(e, movie)}
           className="btn nominate"
           iconClass="far fa-check-circle"
-          disabled={props.disabled}
+          disabled={movie.nominated}
         />
       </div>
     </div>

@@ -8,7 +8,7 @@ function NominationItem(props) {
       <div className="nomination-item-details">
         <h3 className="">Movie Title</h3>
         <p>(1993)</p>
-        <p className="mb-1">
+        <p>
           Donec id elit non mi porta gravida at eget metus. Lorem, ipsum dolor
           sit amet consectetur adipisicing elit. Illo, iure?
         </p>

@@ -1,37 +1,34 @@
 import React, { Component } from "react";
 import "./MovieList.css";
 import MovieItem from "./MovieItem";
+// import DefaultPoster from "../../assets/Images/movie-poster.jpg";
 
 class MovieList extends Component {
-  state = { disabled: false, label: "Nominate" };
-  handleNomination = (e) => {
-    if (e.currentTarget.disabled === false) {
-      this.setState({
-        disabled: true,
-        label: "Nominated",
-      });
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      label: "Nominate",
+      Nominations: [],
+    };
+  }
+
   render() {
-    return (
-      <div className="movie-list-container">
+    console.log(this.props.Movies);
+    const MovieList = this.props.Movies.map((movie) => {
+      if (movie.Poster === "N/A") {
+        movie.Poster =
+          "https://thumbs.dreamstime.com/b/sign-word-unavailable-turned-available-two-pieces-white-paper-53496146.jpg";
+      }
+      return (
         <MovieItem
-          disabled={this.state.disabled}
-          onClick={(e) => this.handleNomination(e)}
-          label={this.state.label}
+          key={movie.imdbID}
+          movie={movie}
+          disabled={this.props.disabled}
+          onNominate={this.props.onNominate}
         />
-        <MovieItem
-          disabled={this.state.disabled}
-          onClick={(e) => this.handleNomination(e)}
-          label={this.state.label}
-        />
-        <MovieItem
-          disabled={this.state.disabled}
-          onClick={(e) => this.handleNomination(e)}
-          label={this.state.label}
-        />
-      </div>
-    );
+      );
+    });
+    return <div className="movie-list-container">{MovieList}</div>;
   }
 }
 

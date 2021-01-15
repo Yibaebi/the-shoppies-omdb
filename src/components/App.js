@@ -4,6 +4,7 @@ import "./App.css";
 import MovieList from "./Movie-List/MovieList";
 import SearchBar from "./Search-Bar/SearchBar";
 import NominationList from "./Nomination-List/NominationList";
+import MovieItem from "./Movie-List/MovieItem";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends React.Component {
       active: "active",
       searchQuery: "",
       Movies: [],
+      disabled: false,
     };
     this.tabIndex = React.createRef();
   }
@@ -21,13 +23,20 @@ class App extends React.Component {
     this.handleSearchSubmit = async (e) => {
       e.preventDefault();
       const response = await fetch(
-        `http://www.omdbapi.com/?s=${this.state.searchQuery}&apikey=d2850ca8&plot=full`
+        `http://www.omdbapi.com/?s=rangers&apikey=d2850ca8`
       );
       const responseJSON = await response.json();
-      const Movies = responseJSON;
+      const MoviesList = responseJSON.Search;
+
+      // ${this.state.searchQuery}
+
+      MoviesList.forEach(function (movie) {
+        movie.nominated = false;
+        movie.label = "Nominate";
+      });
 
       this.setState({
-        Movies: Movies.Search,
+        Movies: MoviesList,
       });
     };
   }
@@ -42,6 +51,25 @@ class App extends React.Component {
 
   handleClick = () => {
     console.log();
+  };
+
+  handleNomination = (e, movie) => {
+    console.log("Nominate button clicked", movie);
+
+    const Movies = this.state.Movies.map((movieItem) => {
+      if (movie.imdbID === movieItem.imdbID) {
+        console.log(movie.nominated);
+        movieItem.nominated = movie.nominated === false ? true : false;
+        movieItem.label = "Nominated";
+      }
+
+      console.log(movieItem);
+      return movieItem;
+    });
+
+    this.setState({
+      Movies: Movies,
+    });
   };
   render() {
     return (
@@ -83,7 +111,10 @@ class App extends React.Component {
           </TabList>
           <main className="main-container">
             <TabPanel>
-              <MovieList Movies={this.state.Movies} />
+              <MovieList
+                Movies={this.state.Movies}
+                onNominate={this.handleNomination}
+              />
             </TabPanel>
             <TabPanel>
               <NominationList />
