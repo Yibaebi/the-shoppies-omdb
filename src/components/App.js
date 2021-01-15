@@ -22,7 +22,7 @@ class App extends React.Component {
     this.handleSearchSubmit = async (e) => {
       e.preventDefault();
       const response = await fetch(
-        `http://www.omdbapi.com/?s=rangers&apikey=d2850ca8`
+        `https://www.omdbapi.com/?s=rangers&apikey=d2850ca8`
       );
       const responseJSON = await response.json();
       const MoviesList = responseJSON.Search;
@@ -58,7 +58,7 @@ class App extends React.Component {
     const Movies = this.state.Movies.map((movieItem) => {
       if (movie.imdbID === movieItem.imdbID) {
         console.log(movie.nominated);
-        movieItem.nominated = movie.nominated === false ? true : false;
+        movieItem.nominated = true;
         movieItem.label = "Nominated";
       }
 
