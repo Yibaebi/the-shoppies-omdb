@@ -36,6 +36,7 @@ class App extends React.Component {
 
       this.setState({
         searchIcon: <Loader />,
+        selectedIndex: 0,
       });
 
       const response = await fetch(
@@ -69,10 +70,6 @@ class App extends React.Component {
 
   handleSelect = (index) => {
     this.setState({ selectedIndex: index });
-  };
-
-  handleButtonClick = () => {
-    this.setState({ selectedIndex: 0 });
   };
 
   saveToLocalStorage = (list) => {
@@ -165,6 +162,7 @@ class App extends React.Component {
             <Tab
               className={`tabs-item ${this.state.active}`}
               onClick={this.handleClick}
+              tabIndex="1"
             >
               Movies
             </Tab>
