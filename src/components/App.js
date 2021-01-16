@@ -19,6 +19,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const NominationList = JSON.parse(
+      localStorage.getItem("shopify-movies-app")
+    );
+
+    this.setState({
+      Nominations: NominationList,
+    });
+
     this.handleSearchSubmit = async (e) => {
       e.preventDefault();
       const response = await fetch(
@@ -48,27 +56,29 @@ class App extends React.Component {
     this.setState({ selectedIndex: 0 });
   };
 
-  handleClick = () => {
-    console.log();
+  saveToLocalStorage = (list) => {
+    localStorage.setItem("shopify-movies-app", JSON.stringify(list));
   };
 
   handleNomination = (e, movie) => {
-    console.log("Nominate button clicked", movie);
-
     const Movies = this.state.Movies.map((movieItem) => {
       if (movie.imdbID === movieItem.imdbID) {
-        console.log(movie.nominated);
         movieItem.nominated = true;
         movieItem.label = "Nominated";
       }
 
-      console.log(movieItem);
       return movieItem;
     });
-
     this.setState({
       Movies: Movies,
     });
+
+    const NominationList = [...this.state.Nominations, movie];
+    this.setState({
+      Nominations: NominationList,
+    });
+
+    this.saveToLocalStorage(NominationList);
   };
   render() {
     return (
@@ -116,7 +126,7 @@ class App extends React.Component {
               />
             </TabPanel>
             <TabPanel>
-              <NominationList />
+              <NominationList Nominations={this.state.Nominations} />
             </TabPanel>
           </main>
         </Tabs>

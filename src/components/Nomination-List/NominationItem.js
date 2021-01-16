@@ -1,26 +1,22 @@
 import React from "react";
 import Button from "../Buttons/Button";
 
-function NominationItem(props) {
-  console.log(props);
+function NominationItem({ Nominated }) {
+  console.log("Nominations", Nominated);
   return (
-    <div className="nomination-item">
-      <div className="nomination-item-details">
-        <h3 className="">Movie Title</h3>
-        <p>(1993)</p>
-        <p>
-          Donec id elit non mi porta gravida at eget metus. Lorem, ipsum dolor
-          sit amet consectetur adipisicing elit. Illo, iure?
-        </p>
-        <Button
-          label="Remove"
-          type="submit"
-          onClick={console.log("Deleted")}
-          className="btn delete"
-          disabled={props.disabled}
-          iconClass="fas fa-trash-alt"
-        />
+    <div className="nomination-item-details">
+      <div>
+        <h3 className="">{Nominated.Title}</h3>
+        <p>{Nominated.Year}</p>
       </div>
+
+      <Button
+        label="Remove"
+        type="submit"
+        onClick={Nominated}
+        className="btn delete"
+        iconClass="fas fa-trash-alt"
+      />
     </div>
   );
 }

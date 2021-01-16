@@ -78,6 +78,7 @@ h1 {
 }
 
 .btn.delete {
+  margin: 10px;
   height: fit-content;
   background-color: rgb(255, 70, 40);
 }
