@@ -19,28 +19,32 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const NominationList = JSON.parse(
-      localStorage.getItem("shopify-movies-app")
+    const storedNominations = JSON.parse(
+      localStorage.getItem("shoppify-movie-app")
     );
-
-    this.setState({
-      Nominations: NominationList,
-    });
-
+    console.log(storedNominations);
+    if (storedNominations !== null) {
+      this.setState({
+        Nominations: storedNominations,
+      });
+    }
     this.handleSearchSubmit = async (e) => {
       e.preventDefault();
       const response = await fetch(
-        `https://www.omdbapi.com/?s=rangers&apikey=d2850ca8`
+        `https://www.omdbapi.com/?s=${this.state.searchQuery}&apikey=d2850ca8`
       );
       const responseJSON = await response.json();
       const MoviesList = responseJSON.Search;
-
-      // ${this.state.searchQuery}
 
       MoviesList.forEach(function (movie) {
         movie.nominated = false;
         movie.label = "Nominate";
       });
+      console.log("Nominations current", this.state.Nominations);
+      console.log("Search current", MoviesList);
+
+      TitlesAreSame(MoviesList, this.state.Nominations);
+      console.log("Nominated", MoviesList);
 
       this.setState({
         Movies: MoviesList,
@@ -57,7 +61,7 @@ class App extends React.Component {
   };
 
   saveToLocalStorage = (list) => {
-    localStorage.setItem("shopify-movies-app", JSON.stringify(list));
+    localStorage.setItem("shoppify-movie-app", JSON.stringify(list));
   };
 
   handleNomination = (e, movie) => {
@@ -74,12 +78,14 @@ class App extends React.Component {
     });
 
     const NominationList = [...this.state.Nominations, movie];
+
     this.setState({
       Nominations: NominationList,
     });
 
     this.saveToLocalStorage(NominationList);
   };
+
   render() {
     return (
       <div className="App">
@@ -134,5 +140,16 @@ class App extends React.Component {
     );
   }
 }
+
+const TitlesAreSame = (moviesList, nominationList) => {
+  for (let nominated in nominationList) {
+    for (let Title in moviesList) {
+      if (moviesList[Title].Title === nominationList[nominated].Title) {
+        moviesList[Title].nominated = true;
+        moviesList[Title].label = "Nominated";
+      }
+    }
+  }
+};
 
 export default App;
