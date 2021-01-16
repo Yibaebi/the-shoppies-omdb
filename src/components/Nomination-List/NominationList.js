@@ -3,11 +3,12 @@ import NominationItem from "./NominationItem";
 
 class NominationList extends Component {
   render() {
-    console.log(this.props.Nominations);
     const NominationList = this.props.Nominations.map((Nomination) => (
       <div className="nomination-item" key={Nomination.imdbID}>
-        {console.log(Nomination)}
-        <NominationItem Nominated={Nomination} />
+        <NominationItem
+          Nominated={Nomination}
+          removeNomination={this.props.removeNomination}
+        />
       </div>
     ));
     return <div className="nomination-container">{NominationList}</div>;

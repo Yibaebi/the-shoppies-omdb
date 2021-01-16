@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "../Buttons/Button";
 
-function NominationItem({ Nominated }) {
-  console.log("Nominations", Nominated);
+function NominationItem({ Nominated, removeNomination }) {
   return (
     <div className="nomination-item-details">
       <div>
@@ -13,7 +12,7 @@ function NominationItem({ Nominated }) {
       <Button
         label="Remove"
         type="submit"
-        onClick={Nominated}
+        onClick={(e) => removeNomination(e, Nominated)}
         className="btn delete"
         iconClass="fas fa-trash-alt"
       />

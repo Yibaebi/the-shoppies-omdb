@@ -22,7 +22,7 @@ class App extends React.Component {
     const storedNominations = JSON.parse(
       localStorage.getItem("shoppify-movie-app")
     );
-    console.log(storedNominations);
+
     if (storedNominations !== null) {
       this.setState({
         Nominations: storedNominations,
@@ -40,11 +40,12 @@ class App extends React.Component {
         movie.nominated = false;
         movie.label = "Nominate";
       });
-      console.log("Nominations current", this.state.Nominations);
-      console.log("Search current", MoviesList);
 
       TitlesAreSame(MoviesList, this.state.Nominations);
-      console.log("Nominated", MoviesList);
+
+      if (this.state.Nominations.length >= 5) {
+        MoviesList.map((movie) => (movie.nominated = true));
+      }
 
       this.setState({
         Movies: MoviesList,
@@ -65,25 +66,61 @@ class App extends React.Component {
   };
 
   handleNomination = (e, movie) => {
-    const Movies = this.state.Movies.map((movieItem) => {
+    const Movies = this.state.Movies;
+    Movies.map((movieItem) => {
       if (movie.imdbID === movieItem.imdbID) {
         movieItem.nominated = true;
         movieItem.label = "Nominated";
       }
-
       return movieItem;
-    });
-    this.setState({
-      Movies: Movies,
     });
 
     const NominationList = [...this.state.Nominations, movie];
+    if (NominationList.length >= 5) {
+      const newMovies = this.state.Movies.map(
+        (movie) => (movie.nominated = true)
+      );
+
+      this.setState({
+        Movies: newMovies,
+      });
+    }
 
     this.setState({
       Nominations: NominationList,
+      Movies: Movies,
     });
 
     this.saveToLocalStorage(NominationList);
+  };
+
+  //Function to remove nominations from list
+  removeNomination = (e, nominated) => {
+    const newNominationList = this.state.Nominations;
+    const newNominations = newNominationList.filter(
+      (nomination) => nomination.Title !== nominated.Title
+    );
+
+    let updateMoviesList = this.state.Movies;
+
+    updateMoviesList.map((movieItem) => {
+      if (nominated.imdbID === movieItem.imdbID) {
+        movieItem.nominated = false;
+        movieItem.label = "Nominate";
+      }
+      return movieItem;
+    });
+
+    updateMoviesList = restoreNominationStatus(
+      updateMoviesList,
+      newNominations
+    );
+    this.saveToLocalStorage(newNominations);
+
+    this.setState({
+      Nominations: newNominations,
+      Movies: updateMoviesList,
+    });
   };
 
   render() {
@@ -132,7 +169,10 @@ class App extends React.Component {
               />
             </TabPanel>
             <TabPanel>
-              <NominationList Nominations={this.state.Nominations} />
+              <NominationList
+                Nominations={this.state.Nominations}
+                removeNomination={this.removeNomination}
+              />
             </TabPanel>
           </main>
         </Tabs>
@@ -150,6 +190,20 @@ const TitlesAreSame = (moviesList, nominationList) => {
       }
     }
   }
+};
+
+const restoreNominationStatus = (moviesList, nominationList) => {
+  for (let nomination in nominationList) {
+    for (let Title in moviesList) {
+      if (moviesList[Title].label === "Nominated") {
+        continue;
+      } else if (moviesList[Title].label === "Nominate") {
+        moviesList[Title].nominated = false;
+        moviesList[Title].label = "Nominate";
+      }
+    }
+  }
+  return moviesList;
 };
 
 export default App;
