@@ -68,16 +68,25 @@
   transition: 0.3s all ease-in;
   outline: none;
   cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  background: #3f3d56;
+  color: #fff;
+  height: 50px;
 }
 
 .tabs-container li:focus {
-  background-color: #fbf7ed;
-  border-bottom: 2px solid #008060;
+  background-color: #008060;
 }
 
 .tabs-container li:hover {
-  background-color: rgba(187, 68, 48, 0.3);
+  background-color: #008060;
 }
 .tabs-container li:first-of-type {
-  border-right: 2px solid #008060;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.tabs-container li:last-of-type {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }

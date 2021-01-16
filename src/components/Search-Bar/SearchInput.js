@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchInput({ onSubmit, value, onChange }) {
+function SearchInput({ onSubmit, value, onChange, searchIcon }) {
   return (
     <form onSubmit={onSubmit}>
       <input
@@ -10,7 +10,7 @@ function SearchInput({ onSubmit, value, onChange }) {
         placeholder="Enter movie title"
       />
       <button type="submit" className="search-button">
-        <i className="fa fa-search"></i>
+        {searchIcon}
       </button>
     </form>
   );

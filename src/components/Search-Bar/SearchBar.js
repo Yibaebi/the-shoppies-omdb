@@ -10,6 +10,7 @@ export default class SearchBar extends Component {
           value={this.props.value}
           onSubmit={this.props.onSubmit}
           onChange={this.props.onChange}
+          searchIcon={this.props.searchIcon}
         />
       </div>
     );

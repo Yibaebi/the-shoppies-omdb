@@ -4,6 +4,7 @@ import "./App.css";
 import MovieList from "./Movie-List/MovieList";
 import SearchBar from "./Search-Bar/SearchBar";
 import NominationList from "./Nomination-List/NominationList";
+import Loader from "../utilities/loaders/loaders";
 
 class App extends React.Component {
   constructor(props) {
@@ -14,13 +15,14 @@ class App extends React.Component {
       searchQuery: "",
       Movies: [],
       Nominations: [],
+      searchIcon: <i className="fa fa-search"></i>,
     };
     this.tabIndex = React.createRef();
   }
 
   componentDidMount() {
     const storedNominations = JSON.parse(
-      localStorage.getItem("shoppify-movie-app")
+      localStorage.getItem("shopify-movie-app")
     );
 
     if (storedNominations !== null) {
@@ -28,20 +30,32 @@ class App extends React.Component {
         Nominations: storedNominations,
       });
     }
+
     this.handleSearchSubmit = async (e) => {
       e.preventDefault();
+
+      this.setState({
+        searchIcon: <Loader />,
+      });
+
       const response = await fetch(
         `https://www.omdbapi.com/?s=${this.state.searchQuery}&apikey=d2850ca8`
       );
       const responseJSON = await response.json();
       const MoviesList = responseJSON.Search;
 
+      if (MoviesList.length) {
+        this.setState({
+          searchIcon: <i className="fa fa-search"></i>,
+        });
+      }
+
       MoviesList.forEach(function (movie) {
         movie.nominated = false;
         movie.label = "Nominate";
       });
 
-      TitlesAreSame(MoviesList, this.state.Nominations);
+      titlesAreSame(MoviesList, this.state.Nominations);
 
       if (this.state.Nominations.length >= 5) {
         MoviesList.map((movie) => (movie.nominated = true));
@@ -62,7 +76,7 @@ class App extends React.Component {
   };
 
   saveToLocalStorage = (list) => {
-    localStorage.setItem("shoppify-movie-app", JSON.stringify(list));
+    localStorage.setItem("shopify-movie-app", JSON.stringify(list));
   };
 
   handleNomination = (e, movie) => {
@@ -139,7 +153,8 @@ class App extends React.Component {
             value={this.state.searchQuery}
             onSubmit={(e) => this.handleSearchSubmit(e)}
             onChange={(e) => this.setState({ searchQuery: e.target.value })}
-          />
+            searchIcon={this.state.searchIcon}
+          ></SearchBar>
         </header>
 
         <Tabs
@@ -181,7 +196,7 @@ class App extends React.Component {
   }
 }
 
-const TitlesAreSame = (moviesList, nominationList) => {
+const titlesAreSame = (moviesList, nominationList) => {
   for (let nominated in nominationList) {
     for (let Title in moviesList) {
       if (moviesList[Title].Title === nominationList[nominated].Title) {
