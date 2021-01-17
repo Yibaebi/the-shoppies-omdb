@@ -42,7 +42,7 @@ h1 {
 }
 
 h1 i {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 h1 span {
@@ -206,5 +206,5 @@ h1 span {
 }
 
 .empty-nomination-list {
-  color: #a4303f;
+  width: 100%;
 }

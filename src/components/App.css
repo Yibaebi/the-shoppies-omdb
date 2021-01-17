@@ -12,6 +12,8 @@
   background-position: center;
   overflow: hidden;
   position: relative;
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
 }
 
 .main-container {
