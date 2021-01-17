@@ -62,7 +62,16 @@ class App extends React.Component {
           Movies: MoviesList,
         });
       } else {
-        toast.error("Enter a movie title.");
+        toast.warn(
+          <CustomToast
+            type="red"
+            title="Hi! "
+            text="please enter movie title"
+          />,
+          {
+            autoClose: 10000,
+          }
+        );
       }
     };
   }
@@ -123,7 +132,16 @@ class App extends React.Component {
 
   //Function to add nominations to Nomination list
   handleNomination = (e, movie) => {
-    toast.success(`"${movie.Title}" has been nominated successfully.`);
+    toast.success(
+      <CustomToast
+        title={`"${movie.Title}"`}
+        type="green"
+        text="has been nominated successfully"
+      />,
+      {
+        autoClose: 15000,
+      }
+    );
     const Movies = this.state.Movies;
     Movies.map((movieItem) => {
       if (movie.imdbID === movieItem.imdbID) {
@@ -161,11 +179,14 @@ class App extends React.Component {
 
   //Function to remove nominations from list
   removeNomination = (e, nominated) => {
-    toast.info(
-      `"${nominated.Title}" has been removed successfully.`,
-
+    toast.error(
+      <CustomToast
+        title={`"${nominated.Title}"`}
+        type="red"
+        text="has been removed successfully"
+      />,
       {
-        autoClose: 20000,
+        autoClose: 15000,
       }
     );
     const newNominationList = this.state.Nominations;
@@ -301,6 +322,10 @@ class App extends React.Component {
     );
   }
 }
+
+const CustomToast = ({ closeToast, title, type, text }) => {
+  return <div className={type}>{`${title} ${text}.`}</div>;
+};
 
 //Function to check search results for already exisiting nominations in local storage and disable them.
 const titlesAreSame = (moviesList, nominationList) => {
