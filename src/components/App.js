@@ -41,26 +41,44 @@ class App extends React.Component {
           selectedIndex: 0,
         });
 
-        const MoviesList = await this.getMoviesFromOMDB();
-        //Remove loader in search bar if response is true.
-        if (MoviesList.length) {
+        const Response = await this.getMoviesFromOMDB();
+
+        if (Response.Response === "True") {
+          const MoviesList = Response.Search;
+          console.log(MoviesList);
+
+          //Remove loader in search bar if response is true.
+          if (MoviesList.length) {
+            this.setState({
+              searchIcon: <i className="fa fa-search"></i>,
+            });
+          }
+
+          //Give each result a nomination status of false
+          MoviesList.forEach(function (movie) {
+            movie.nominated = false;
+            movie.label = "Nominate";
+          });
+
+          titlesAreSame(MoviesList, this.state.Nominations);
+          this._disableNominationButtons(MoviesList);
+
           this.setState({
+            Movies: MoviesList,
+          });
+        } else if (Response.Response === "False") {
+          toast.warn(
+            <CustomToast type="red" title="Movie " text="title not found" />,
+            {
+              autoClose: 10000,
+            }
+          );
+
+          this.setState({
+            emptyMovieList: "Try Again.",
             searchIcon: <i className="fa fa-search"></i>,
           });
         }
-
-        //Give each result a nomination status of false
-        MoviesList.forEach(function (movie) {
-          movie.nominated = false;
-          movie.label = "Nominate";
-        });
-
-        titlesAreSame(MoviesList, this.state.Nominations);
-        this._disableNominationButtons(MoviesList);
-
-        this.setState({
-          Movies: MoviesList,
-        });
       } else {
         toast.warn(
           <CustomToast
@@ -74,16 +92,16 @@ class App extends React.Component {
         );
       }
     };
-  }
 
-  getMoviesFromOMDB = async () => {
-    const response = await fetch(
-      `https://www.omdbapi.com/?s=${this.state.searchQuery}&apikey=d2850ca8`
-    );
-    const responseJSON = await response.json();
-    const MoviesList = responseJSON.Search;
-    return MoviesList;
-  };
+    this.getMoviesFromOMDB = async () => {
+      const response = await fetch(
+        `https://www.omdbapi.com/?s=${this.state.searchQuery}&apikey=d2850ca8`
+      );
+      const responseJSON = await response.json();
+
+      return responseJSON;
+    };
+  }
 
   //Function to scitch tabs
   handleSelect = (index) => {
@@ -134,7 +152,7 @@ class App extends React.Component {
   handleNomination = (e, movie) => {
     toast.success(
       <CustomToast
-        title={`"${movie.Title}"`}
+        title={`"${movie.Title}" `}
         type="green"
         text="has been nominated successfully"
       />,
@@ -154,6 +172,9 @@ class App extends React.Component {
     //Disable nomination buttons after five nominations
     const NominationList = [...this.state.Nominations, movie];
     if (NominationList.length >= 5) {
+      toast.warning("Nomination limit reached.", {
+        autoClose: false,
+      });
       const newMovies = this.state.Movies;
       newMovies.map((movie) => {
         movie.nominated = true;
@@ -181,7 +202,7 @@ class App extends React.Component {
   removeNomination = (e, nominated) => {
     toast.error(
       <CustomToast
-        title={`"${nominated.Title}"`}
+        title={`"${nominated.Title}" `}
         type="red"
         text="has been removed successfully"
       />,
@@ -226,6 +247,8 @@ class App extends React.Component {
   //Disable nomination buttons if five nominations already exists in list
   _disableNominationButtons(MoviesList) {
     if (this.state.Nominations.length >= 5) {
+      toast.warning("Nomination limit reached.");
+
       MoviesList.map((movie) => {
         movie.nominated = true;
         if (movie.label === "Nominate") {
@@ -318,13 +341,20 @@ class App extends React.Component {
             </TabPanel>
           </main>
         </Tabs>
+
+        <footer>Designed by Elliot Yibaebi &copy; 2021</footer>
       </div>
     );
   }
 }
 
 const CustomToast = ({ closeToast, title, type, text }) => {
-  return <div className={type}>{`${title} ${text}.`}</div>;
+  return (
+    <div className={type}>
+      <span>{`${title}`}</span>
+      {`${text}.`}
+    </div>
+  );
 };
 
 //Function to check search results for already exisiting nominations in local storage and disable them.

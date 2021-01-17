@@ -15,11 +15,12 @@
   top: 0;
   background-color: #3f3d56;
   color: white;
-  font-size: 17px;
-  padding: 10px;
+  font-size: 16px;
+  padding: 12px;
   border-radius: 10px;
   text-align: center;
-  width: 60%;
+  width: 70%;
+  font-weight: 600;
 }
 
 .movie-item {
@@ -85,9 +86,14 @@
   transition: all 0.5s ease-in-out;
 }
 .title-container h3 {
-  width: 80%;
-  font-size: 1.05rem;
+  width: 90%;
+  font-size: 0.9rem;
   font-weight: bolder;
+  margin-bottom: 3px;
+}
+
+.title-container p {
+  font-size: 0.8rem;
 }
 .movie-item:hover .movie-content-container {
   opacity: 1;

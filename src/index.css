@@ -25,7 +25,6 @@ body {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-radius: 10px;
 }
 
 .hero p {
@@ -77,6 +76,7 @@ h1 span {
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
+  outline: none;
 }
 
 .btn span {
@@ -94,7 +94,6 @@ h1 span {
   border: 3px solid #a4303f;
   border-radius: 10px;
   transition: 0.3s all ease-out;
-  outline: none;
 }
 
 .btn.delete:hover {
@@ -181,7 +180,7 @@ h1 span {
   margin: 10px;
   padding: 5px 10px;
   border-radius: 10px;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 .badge-warning {
@@ -191,6 +190,7 @@ h1 span {
   margin: 10px;
   padding: 5px 10px;
   border-radius: 10px;
+  font-weight: bolder;
 }
 
 /* Styles for empty nomination and movie list */
@@ -200,11 +200,20 @@ h1 span {
   font-weight: bold;
   font-size: 1.1rem;
   text-align: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   margin-top: 3em;
 }
 
 .empty-nomination-list {
   width: 100%;
+}
+
+footer {
+  margin: 0 auto;
+  text-align: center;
+  color: #008060;
+  margin-top: 2em;
+  font-weight: bold;
+  padding: 20px;
 }

@@ -9,7 +9,7 @@
 input[type="search"] {
   margin: 0 auto;
   min-width: 260px;
-  border: 3px solid #3f3d56;
+
   padding: 8px;
   height: 45px;
   outline: none;
@@ -17,11 +17,13 @@ input[type="search"] {
   font-size: 1rem;
   border-top-left-radius: 10px;
   transition: all 0.3s ease-in-out;
+  border: 3px solid #fff;
 }
 
 input[type="search"]:focus {
   color: #3f3d56;
   border: 3px solid #fff;
+  border: 3px solid #3f3d56;
 }
 
 .search-button {

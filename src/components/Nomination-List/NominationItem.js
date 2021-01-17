@@ -5,8 +5,8 @@ const NominationItem = ({ Nominated, removeNomination }) => {
   return (
     <div className="nomination-item-details">
       <div>
-        <h3 className="">{Nominated.Title}</h3>
-        <p>{Nominated.Year}</p>
+        <h3 className="title">{Nominated.Title}</h3>
+        <p>({Nominated.Year})</p>
       </div>
 
       <Button
