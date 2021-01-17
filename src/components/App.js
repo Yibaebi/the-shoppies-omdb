@@ -15,6 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       emptyMovieList: "No movies to display yet. Make a search to nominate.",
+      emptyNominationList: "No nominations yet.",
       badge: "badge-blue",
       selectedIndex: 0,
       active1: "tabs-item active",
@@ -90,6 +91,11 @@ class App extends React.Component {
       this.setState({
         Nominations: storedNominations,
         active1: "tabs-item active",
+      });
+    }
+    if (storedNominations.length >= 5) {
+      this.setState({
+        badge: "badge-warning",
       });
     }
   };
@@ -277,10 +283,16 @@ class App extends React.Component {
               )}
             </TabPanel>
             <TabPanel>
-              <NominationList
-                Nominations={this.state.Nominations}
-                removeNomination={this.removeNomination}
-              />
+              {this.state.Nominations.length ? (
+                <NominationList
+                  Nominations={this.state.Nominations}
+                  removeNomination={this.removeNomination}
+                />
+              ) : (
+                <p className="empty-nomination-list">
+                  {this.state.emptyNominationList}
+                </p>
+              )}
             </TabPanel>
           </main>
         </Tabs>
