@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchInput({ onSubmit, value, onChange, searchIcon }) {
+const SearchInput = ({ onSubmit, value, onChange, searchIcon }) => {
   return (
     <form onSubmit={onSubmit}>
       <input
@@ -14,6 +14,6 @@ function SearchInput({ onSubmit, value, onChange, searchIcon }) {
       </button>
     </form>
   );
-}
+};
 
 export default SearchInput;

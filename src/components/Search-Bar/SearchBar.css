@@ -8,18 +8,20 @@
 
 input[type="search"] {
   margin: 0 auto;
-  min-width: 240px;
+  min-width: 260px;
   border: 3px solid #3f3d56;
   padding: 8px;
   height: 45px;
   outline: none;
-  color: #9dbfaf;
+  color: #3f3d56;
   font-size: 1rem;
   border-top-left-radius: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 input[type="search"]:focus {
-  color: #004c3f;
+  color: #3f3d56;
+  border: 3px solid #fff;
 }
 
 .search-button {
@@ -35,7 +37,7 @@ input[type="search"]:focus {
   border-bottom-right-radius: 10px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
   input[type="search"] {
     min-width: 400px;
   }

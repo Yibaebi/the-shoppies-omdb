@@ -54,6 +54,8 @@
   background: white;
   box-shadow: 0 8px 6px -6px black;
   border: 3px solid #008060;
+  color: #3f3d56;
+  font-weight: bold;
 }
 
 .nomination-item-details p {

@@ -13,7 +13,7 @@ body {
   color: #fbf7ed;
   justify-self: start;
   width: 100vw;
-  height: 50vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,14 +72,6 @@ h1 span {
   border-style: solid;
   border-color: transparent;
 }
-.btn.nominate:disabled,
-.btn.nominate[disabled],
-.btn.delete:disabled,
-.btn.delete[disabled] {
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-}
 
 .btn span {
   margin: 2px;
@@ -92,17 +84,42 @@ h1 span {
 .btn.delete {
   margin: 10px;
   height: fit-content;
-  background-color: rgb(255, 70, 40);
+  background-color: #a4303f;
+  border: 3px solid #a4303f;
+  border-radius: 10px;
+  transition: 0.3s all ease-out;
+  outline: none;
+}
+
+.btn.delete:hover {
+  background-color: rgba(164, 48, 63, 0.9);
+  background-color: white;
+  color: #a4303f;
+  border: 3px solid #a4303f;
 }
 
 .btn.nominate {
-  margin: 25px 10px 0px 0px;
+  backface-visibility: hidden;
   height: fit-content;
   background-color: #008060;
 }
+.btn.nominate:hover {
+  background-color: white;
+  color: #008060;
+  border: 3px solid #008060;
+}
 
+.btn.nominate:disabled,
+.btn.nominate[disabled],
+.btn.delete:disabled,
+.btn.delete[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
+}
 .ripple-background {
-  background: #008060;
+  background: rgb(0, 128, 96);
 }
 .circle {
   width: 100%;
@@ -192,17 +209,23 @@ h1 span {
 }
 
 .badge-warning {
-  background-color: #fbf7ed;
-  color: #a4303f;
+  transition: 0.2s all ease-in;
+  background-color: rgba(164, 48, 63, 0.9);
+  color: #fbf7ed;
   margin: 10px;
   padding: 5px 10px;
   border-radius: 10px;
 }
 
-.empty-movie-list {
+.empty-movie-list,
+.empty-nomination-list {
   color: #3f3d56;
   font-weight: bold;
   font-size: 1.3rem;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 4em;
+}
+
+.empty-nomination-list {
+  color: #a4303f;
 }

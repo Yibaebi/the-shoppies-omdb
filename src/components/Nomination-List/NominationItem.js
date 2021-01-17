@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Buttons/Button";
 
-function NominationItem({ Nominated, removeNomination }) {
+const NominationItem = ({ Nominated, removeNomination }) => {
   return (
     <div className="nomination-item-details">
       <div>
@@ -18,6 +18,6 @@ function NominationItem({ Nominated, removeNomination }) {
       />
     </div>
   );
-}
+};
 
 export default NominationItem;

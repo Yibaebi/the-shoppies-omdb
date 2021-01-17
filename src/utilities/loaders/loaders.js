@@ -7,6 +7,6 @@ export default function primaryLoader() {
 
 export function MovieLoader() {
   return (
-    <ScaleLoader color="#3f3d56" height={35} width={3} radius={4} margin={2} />
+    <ScaleLoader color="#3f3d56" height={35} width={10} radius={4} margin={2} />
   );
 }
