@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 body {
@@ -28,22 +28,21 @@ body {
   border-radius: 10px;
 }
 
-.hero > i:first-child {
-  font-size: 65px;
-  font-weight: bold;
-  text-align: center;
-}
-
 .hero p {
   font-style: italic;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+  margin: 0.5em;
 }
 h1 {
   text-align: center;
   font-size: 65px;
   z-index: 2;
+}
+
+h1 i {
+  margin-right: 10px;
 }
 
 h1 span {
