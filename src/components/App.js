@@ -11,7 +11,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       selectedIndex: 0,
-      active: "active",
+      active1: "tabs-item active",
+      active2: "tabs-item",
       searchQuery: "",
       Movies: [],
       Nominations: [],
@@ -28,6 +29,7 @@ class App extends React.Component {
     if (storedNominations !== null) {
       this.setState({
         Nominations: storedNominations,
+        active1: "tabs-item active",
       });
     }
 
@@ -105,6 +107,20 @@ class App extends React.Component {
     this.saveToLocalStorage(NominationList);
   };
 
+  handleTabActiveness = (e) => {
+    if (e.target.tabIndex === 1) {
+      this.setState({
+        active1: "tabs-item active",
+        active2: "tabs-item",
+      });
+    } else if (e.target.tabIndex === 2) {
+      this.setState({
+        active1: "tabs-item",
+        active2: "tabs-item active",
+      });
+    }
+  };
+
   //Function to remove nominations from list
   removeNomination = (e, nominated) => {
     const newNominationList = this.state.Nominations;
@@ -138,20 +154,22 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <div className="ripple-background">
-            <div className="circle xxlarge shade1"></div>
-            <div className="circle xlarge shade2"></div>
-          </div>
           <div className="hero">
-            <h1>The Shoppies</h1>
-            <p>Movie awards for entrepreneurs</p>
+            <h1>
+              <i className="fab fa-shopify"></i> The <span>Shopp</span>ies
+            </h1>
+            <p>"Movie awards for entrepreneurs"</p>
+            <div className="ripple-background">
+              <div className="circle xxlarge shade1"></div>
+              <div className="circle xlarge shade2"></div>
+            </div>
+            <SearchBar
+              value={this.state.searchQuery}
+              onSubmit={(e) => this.handleSearchSubmit(e)}
+              onChange={(e) => this.setState({ searchQuery: e.target.value })}
+              searchIcon={this.state.searchIcon}
+            ></SearchBar>
           </div>
-          <SearchBar
-            value={this.state.searchQuery}
-            onSubmit={(e) => this.handleSearchSubmit(e)}
-            onChange={(e) => this.setState({ searchQuery: e.target.value })}
-            searchIcon={this.state.searchIcon}
-          ></SearchBar>
         </header>
 
         <Tabs
@@ -160,16 +178,18 @@ class App extends React.Component {
         >
           <TabList className="tabs-container">
             <Tab
-              className={`tabs-item ${this.state.active}`}
-              onClick={this.handleClick}
+              className={`${this.state.active1}`}
+              onClick={this.handleTabActiveness}
               tabIndex="1"
+              onSelect={this.handleSelect}
             >
               Movies
             </Tab>
             <Tab
-              className={`tabs-item ${this.state.active}`}
-              onClick={this.handleClick}
+              className={`${this.state.active2}`}
+              onClick={this.handleTabActiveness}
               tabIndex="2"
+              onSelect={this.handleSelect}
             >
               Nominations
             </Tab>

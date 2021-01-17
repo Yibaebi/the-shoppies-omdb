@@ -11,7 +11,7 @@ class NominationList extends Component {
         />
       </div>
     ));
-    return <div className="nomination-container">{NominationList}</div>;
+    return <div className={`nomination-container`}>{NominationList}</div>;
   }
 }
 

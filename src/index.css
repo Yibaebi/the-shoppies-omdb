@@ -10,25 +10,35 @@ body {
 }
 
 .hero {
+  color: #fbf7ed;
   justify-self: start;
-  width: 95vw;
+  width: 100vw;
   height: 50vh;
-  background-color: #fff;
-  border-radius: 0 10px 10px 0;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: #34e89e;
+  background: -webkit-linear-gradient(to right, #0f3443, #008060);
+  background: linear-gradient(to right, #0f3443, #008060);
+  background: rgba(0, 128, 96, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 10px;
+}
+
+.hero p {
+  font-style: italic;
+  font-size: 20px;
+  font-weight: bold;
 }
 h1 {
   font-size: 70px;
   z-index: 2;
+}
+
+h1 span {
   color: #3f3d56;
 }
 
