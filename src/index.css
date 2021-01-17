@@ -181,3 +181,28 @@ h1 span {
     transform: scale(0.8);
   }
 }
+
+.badge-blue {
+  background-color: #fbf7ed;
+  color: #3f3d56;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.badge-warning {
+  background-color: #fbf7ed;
+  color: #a4303f;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.empty-movie-list {
+  color: #3f3d56;
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: 30px;
+}

@@ -1,15 +1,21 @@
 import React from "react";
 import { Tabs, TabList, TabPanel, Tab } from "react-tabs";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import MovieList from "./Movie-List/MovieList";
 import SearchBar from "./Search-Bar/SearchBar";
 import NominationList from "./Nomination-List/NominationList";
-import Loader from "../utilities/loaders/loaders";
+import Loader, { MovieLoader } from "../utilities/loaders/loaders";
+
+toast.configure();
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      emptyMovieList: "No movies to display yet. Make a search to nominate.",
+      badge: "badge-blue",
       selectedIndex: 0,
       active1: "tabs-item active",
       active2: "tabs-item",
@@ -27,32 +33,36 @@ class App extends React.Component {
     this.handleSearchSubmit = async (e) => {
       e.preventDefault();
 
-      this.setState({
-        searchIcon: <Loader />,
-        selectedIndex: 0,
-      });
-
-      const MoviesList = await this.getMoviesFromOMDB();
-
-      //Remove loader in search bar if response is true.
-      if (MoviesList.length) {
+      if (this.state.searchQuery) {
         this.setState({
-          searchIcon: <i className="fa fa-search"></i>,
+          searchIcon: <Loader />,
+          emptyMovieList: <MovieLoader />,
+          selectedIndex: 0,
         });
+
+        const MoviesList = await this.getMoviesFromOMDB();
+        //Remove loader in search bar if response is true.
+        if (MoviesList.length) {
+          this.setState({
+            searchIcon: <i className="fa fa-search"></i>,
+          });
+        }
+
+        //Give each result a nomination status of false
+        MoviesList.forEach(function (movie) {
+          movie.nominated = false;
+          movie.label = "Nominate";
+        });
+
+        titlesAreSame(MoviesList, this.state.Nominations);
+        this._disableNominationButtons(MoviesList);
+
+        this.setState({
+          Movies: MoviesList,
+        });
+      } else {
+        toast.error("Enter a movie title.");
       }
-
-      //Give each result a nomination status of false
-      MoviesList.forEach(function (movie) {
-        movie.nominated = false;
-        movie.label = "Nominate";
-      });
-
-      titlesAreSame(MoviesList, this.state.Nominations);
-      this._disableNominationButtons(MoviesList);
-
-      this.setState({
-        Movies: MoviesList,
-      });
     };
   }
 
@@ -106,6 +116,7 @@ class App extends React.Component {
 
   //Function to add nominations to Nomination list
   handleNomination = (e, movie) => {
+    toast.success(`"${movie.Title}" has been nominated successfully.`);
     const Movies = this.state.Movies;
     Movies.map((movieItem) => {
       if (movie.imdbID === movieItem.imdbID) {
@@ -128,6 +139,7 @@ class App extends React.Component {
       });
 
       this.setState({
+        badge: "badge-warning",
         Movies: newMovies,
       });
     }
@@ -142,6 +154,13 @@ class App extends React.Component {
 
   //Function to remove nominations from list
   removeNomination = (e, nominated) => {
+    toast.info(
+      `"${nominated.Title}" has been removed successfully.`,
+
+      {
+        autoClose: 20000,
+      }
+    );
     const newNominationList = this.state.Nominations;
     let updateMoviesList = this.state.Movies;
 
@@ -161,6 +180,13 @@ class App extends React.Component {
       updateMoviesList,
       newNominations
     );
+
+    if (newNominations.length < 5) {
+      this.setState({
+        badge: "badge-blue",
+      });
+    }
+
     this._saveToLocalStorage(newNominations);
 
     this.setState({
@@ -178,6 +204,14 @@ class App extends React.Component {
           movie.label = "Can't Nominate";
         }
         return movie;
+      });
+
+      this.setState({
+        badge: "badge-warning",
+      });
+    } else {
+      this.setState({
+        badge: "badge-blue",
       });
     }
   }
@@ -224,14 +258,23 @@ class App extends React.Component {
               onSelect={this.handleSelect}
             >
               Nominations
+              <p className={`${this.state.badge}`}>
+                {this.state.Nominations.length
+                  ? this.state.Nominations.length
+                  : 0}
+              </p>
             </Tab>
           </TabList>
           <main className="main-container">
             <TabPanel>
-              <MovieList
-                Movies={this.state.Movies}
-                onNominate={this.handleNomination}
-              />
+              {this.state.Movies.length ? (
+                <MovieList
+                  Movies={this.state.Movies}
+                  onNominate={this.handleNomination}
+                />
+              ) : (
+                <p className="empty-movie-list">{this.state.emptyMovieList}</p>
+              )}
             </TabPanel>
             <TabPanel>
               <NominationList
