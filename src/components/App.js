@@ -45,7 +45,6 @@ class App extends React.Component {
 
         if (Response.Response === "True") {
           const MoviesList = Response.Search;
-          console.log(MoviesList);
 
           //Remove loader in search bar if response is true.
           if (MoviesList.length) {
@@ -114,14 +113,12 @@ class App extends React.Component {
       localStorage.getItem("shopify-movie-app")
     );
 
-    console.log("Stored Nominations", storedNominations.length);
     if (storedNominations !== null) {
       this.setState({
         Nominations: storedNominations,
         active1: "tabs-item active",
       });
-    }
-    if (storedNominations.length >= 5) {
+    } else if (storedNominations === null) {
       this.setState({
         badge: "badge-warning",
       });
