@@ -41,6 +41,9 @@
   .movie-item {
     width: 80vw;
   }
+  .movie-list-container h2 {
+    width: 80%;
+  }
 }
 
 .movie-item:hover {
