@@ -39,7 +39,7 @@
   background-color: white;
   text-transform: uppercase;
   text-align: center;
-  font-size: 14px;
+  font-size: 1rem;
   width: 300px;
   padding: 5px;
   transition: 0.3s all ease-in;
@@ -52,6 +52,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 400px) {
+  .tabs-container li {
+    font-size: 12px;
+  }
 }
 
 .tabs-item.active {

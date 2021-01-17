@@ -249,9 +249,8 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <div className="hero">
-            <i className="fab fa-shopify"></i>
             <h1>
-              The <span>Shopp</span>ies
+              <i className="fab fa-shopify"></i>The <span>Shopp</span>ies
             </h1>
             <p>"Movie awards for entrepreneurs"</p>
             <div className="ripple-background">
