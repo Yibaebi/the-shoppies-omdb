@@ -34,6 +34,13 @@
   width: 350px;
   margin-bottom: 20px;
 }
+
+@media screen and (max-width: 400px) {
+  .nomination-item {
+    width: 80vw;
+    margin-bottom: 20px;
+  }
+}
 .nomination-item-details {
   text-align: center;
   display: flex;
@@ -87,9 +94,6 @@
   background-color: #008060;
 }
 
-.tabs-container li:hover {
-  background-color: rgba(63, 61, 86, 0.9);
-}
 .tabs-container li:first-of-type {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;

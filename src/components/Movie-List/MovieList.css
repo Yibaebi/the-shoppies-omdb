@@ -1,7 +1,7 @@
 .movie-list-container {
   margin: 0 auto;
   margin-top: 50px;
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -21,6 +21,12 @@
   transition: 0.3s all ease-in;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+@media screen and (max-width: 400px) {
+  .movie-item {
+    width: 80vw;
+  }
 }
 
 .movie-item:hover {
