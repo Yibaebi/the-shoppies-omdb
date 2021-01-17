@@ -1,4 +1,5 @@
 import React from "react";
+import "./NominationList.css";
 import NominationItem from "./NominationItem";
 
 const NominationList = (props) => {
