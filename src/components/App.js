@@ -87,6 +87,7 @@ class App extends React.Component {
       localStorage.getItem("shopify-movie-app")
     );
 
+    console.log("Stored Nominations", storedNominations.length);
     if (storedNominations !== null) {
       this.setState({
         Nominations: storedNominations,

@@ -2,8 +2,8 @@ import React from "react";
 import "./MovieList.css";
 import MovieItem from "./MovieItem";
 
-const MovieList = () => {
-  const MovieList = this.props.Movies.map((movie) => {
+const MovieList = (props) => {
+  const MovieList = props.Movies.map((movie) => {
     if (movie.Poster === "N/A") {
       movie.Poster =
         "https://thumbs.dreamstime.com/b/sign-word-unavailable-turned-available-two-pieces-white-paper-53496146.jpg";
@@ -12,8 +12,8 @@ const MovieList = () => {
       <MovieItem
         key={movie.imdbID}
         movie={movie}
-        disabled={this.props.disabled}
-        onNominate={this.props.onNominate}
+        disabled={props.disabled}
+        onNominate={props.onNominate}
       />
     );
   });
