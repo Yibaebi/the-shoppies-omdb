@@ -69,7 +69,7 @@ class App extends React.Component {
           toast.warn(
             <CustomToast type="red" title="Movie " text="title not found" />,
             {
-              autoClose: 10000,
+              autoClose: 2000,
             }
           );
 
@@ -86,7 +86,7 @@ class App extends React.Component {
             text="please enter movie title"
           />,
           {
-            autoClose: 10000,
+            autoClose: 2000,
           }
         );
       }
@@ -154,7 +154,7 @@ class App extends React.Component {
         text="has been nominated successfully"
       />,
       {
-        autoClose: 15000,
+        autoClose: 2000,
       }
     );
     const Movies = this.state.Movies;
@@ -170,7 +170,7 @@ class App extends React.Component {
     const NominationList = [...this.state.Nominations, movie];
     if (NominationList.length >= 5) {
       toast.warning("Nomination limit reached.", {
-        autoClose: false,
+        autoClose: 3000,
       });
       const newMovies = this.state.Movies;
       newMovies.map((movie) => {
